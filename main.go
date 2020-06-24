@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+var (
+	n       = flag.Bool("n", false, "bool flag")
+	row int = 1
+)
+
 func readFile(fn string) error {
 	file, err := os.Open(fn)
 	if err != nil {
@@ -16,6 +21,10 @@ func readFile(fn string) error {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
+		if *n {
+			fmt.Printf("%v: ", row)
+			row++
+		}
 		line := scanner.Text()
 		fmt.Println(line)
 	}
